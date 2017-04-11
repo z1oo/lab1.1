@@ -13,11 +13,7 @@ public class MorseCoder implements LanguageTranslator
     private final TreeMap<Character, String> dictionary;
     private static final Pattern dictPattern = Pattern.compile("(.)\\s+([\\-\\.]+)");
 
-    public MorseCoder(TreeMap<Character, String> dictionary)
-    {
-        this.dictionary = (TreeMap<Character,String>)dictionary.clone();
-    }
-    
+
     public MorseCoder(Reader dictStream) throws IllegalTokenException, IOException,
                                                   NullPointerException
     {
@@ -59,7 +55,7 @@ public class MorseCoder implements LanguageTranslator
         BufferedWriter oWriter = new BufferedWriter(oStream);
         BufferedWriter statWriter = new BufferedWriter(statStream);
 
-        String line = null;
+        String line;
         while ((line = reader.readLine()) != null)
         {   
             for (int i = 0; i < line.length(); i++)
@@ -81,7 +77,7 @@ public class MorseCoder implements LanguageTranslator
                     statistic.add(newCounter);
                 }
 
-                String token = null;
+                String token;
                 if ( (token = dictionary.get(line.charAt(i))) != null )
                 {
                     oWriter.write(token + (i == line.length() - 1 ? "" : " "));
