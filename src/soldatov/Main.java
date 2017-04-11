@@ -3,7 +3,6 @@ package soldatov;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.TreeMap;
 import soldatov.langtranslator.*;
 
 
@@ -13,9 +12,15 @@ public class Main
 
     static
     {
-        commands.put("code", new CodeHandler());
-        commands.put("decode", new DecodeHandler());
-        commands.put("exit", new ExitHandler());
+        try {
+            commands.put("code", new CodeHandler());
+            commands.put("decode", new DecodeHandler());
+            commands.put("exit", new ExitHandler());
+        }
+        catch (IOException e)
+        {
+            System.out.println("I\\O error : " + e.getMessage());
+        }
     }
 
     public static void main(String[] args)
