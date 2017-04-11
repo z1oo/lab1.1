@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import soldatov.langtranslator.IllegalTokenException;
 import soldatov.langtranslator.IncorrectLineException;
-import soldatov.morsecode.SymbolCounter;
 
 
 public class DecodeHandler implements CommandHandler

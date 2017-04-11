@@ -8,19 +8,18 @@ import soldatov.langtranslator.*;
 
 public class Main
 {
-    private static final HashMap<String, CommandHandler> commands = new HashMap<String, CommandHandler>();
+    private static final HashMap<String, CommandHandler> commands;
 
-    static
-    {
+    static {
+        commands = new HashMap<String, CommandHandler>();
         try {
             commands.put("code", new CodeHandler());
             commands.put("decode", new DecodeHandler());
             commands.put("exit", new ExitHandler());
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("I\\O error : " + e.getMessage());
         }
+
     }
 
     public static void main(String[] args)
@@ -52,7 +51,6 @@ public class Main
                 catch (IncorrectOperandsException e)
                 {
                     System.out.println("Error : \"" + line + "\" : " + e.getMessage() + "\n");
-                    commands.get("help").run(null);
                 }
                 catch ( IllegalTokenException | IncorrectLineException e)
                 {

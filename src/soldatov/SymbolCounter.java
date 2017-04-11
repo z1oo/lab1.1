@@ -1,4 +1,4 @@
-package soldatov.morsecode;
+package soldatov;
 
 
 public class SymbolCounter implements Comparable
