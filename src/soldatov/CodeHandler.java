@@ -33,7 +33,7 @@ public class CodeHandler implements CommandHandler
                     if(!(this.get(ch.toString()) == e.getValue()) )
                         return false;
                 else
-                    return false;
+                    return false;//
             }
             return true;
             }
