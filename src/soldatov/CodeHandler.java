@@ -1,6 +1,8 @@
 package soldatov;
 
 import java.io.*;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -12,14 +14,39 @@ import soldatov.langtranslator.IncorrectLineException;
 
 public class CodeHandler implements CommandHandler
 {
-    private final TreeMap<Character, String> dictionary;
+    public  class Dict extends TreeMap<java.lang.Character, java.lang.String>{
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (o == null || o.getClass() != this.getClass()) {
+                return false;
+            }
+
+            Dict temp = (Dict) o;
+            Character ch;
+            for(Map.Entry<Character, String> e : temp.entrySet()){
+                ch = e.getKey();
+                if (this.containsKey(ch))
+                    if(!(this.get(ch.toString()) == e.getValue()) )
+                        return false;
+                else
+                    return false;
+            }
+            return true;
+            }
+
+    }
+    private final Dict dictionary;
     private static final Pattern dictPattern = Pattern.compile("(.)\\s+([\\-\\.]+)");
 
     public CodeHandler() throws  IOException, NullPointerException
     {
         Reader dictStream = new FileReader("code.table");
 
-        dictionary = new TreeMap<Character, String>();
+        dictionary = new Dict();
 
         BufferedReader reader = new BufferedReader(dictStream);
 
@@ -41,6 +68,7 @@ public class CodeHandler implements CommandHandler
             IOException,
             NullPointerException
     {
+        dictionary.equals(dictionary);
         if ((iStream == null) || (oStream == null) || (statStream == null))
         {
             throw new NullPointerException("One of the arguments is null");
